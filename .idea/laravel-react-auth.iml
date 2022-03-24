@@ -119,6 +119,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/spatie/backtrace" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/spatie/flare-client-php" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/mailer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/paragonie/sodium_compat" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/paragonie/random_compat" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pusher/pusher-php-server" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

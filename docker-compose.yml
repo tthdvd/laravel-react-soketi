@@ -22,7 +22,27 @@ services:
         networks:
             - sail
         depends_on:
+            - mysql
             - redis
+    mysql:
+        image: 'mysql/mysql-server:8.0'
+        ports:
+            - '${FORWARD_DB_PORT:-3306}:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ROOT_HOST: "%"
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 1
+        volumes:
+            - 'sail-mysql:/var/lib/mysql'
+        networks:
+            - sail
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-p${DB_PASSWORD}"]
+            retries: 3
+            timeout: 5s
     redis:
         image: 'redis:alpine'
         ports:
@@ -35,9 +55,21 @@ services:
             test: ["CMD", "redis-cli", "ping"]
             retries: 3
             timeout: 5s
+    soketi:
+        image: 'quay.io/soketi/soketi:latest-16-alpine'
+        environment:
+            DEBUG: '1'
+            METRICS_SERVER_PORT: '9601'
+        ports:
+            - '${SOKETI_PORT:-6001}:6001'
+            - '${SOKETI_METRICS_SERVER_PORT:-9601}:9601'
+        networks:
+            - sail
 networks:
     sail:
         driver: bridge
 volumes:
+    sail-mysql:
+        driver: local
     sail-redis:
         driver: local

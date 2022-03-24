@@ -11,7 +11,8 @@
         "laravel/framework": "^9.0",
         "laravel/sanctum": "^2.12",
         "laravel/tinker": "^2.5",
-        "laravel/ui": "^3.3"
+        "laravel/ui": "^3.3",
+        "pusher/pusher-php-server": "^7.0"
     },
     "require-dev": {
         "spatie/laravel-ignition": "^1.0",
